@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thomas Lin – Social Links</title>
+    <title>Thomas Lin's Socials</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: #f9fafb;
@@ -16,12 +21,26 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 2rem;
+            padding: 2rem 1rem;
         }
 
         h1 {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .location {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
         }
 
         .links {
@@ -32,48 +51,157 @@
             max-width: 400px;
         }
 
-        .link {
-            text-decoration: none;
+        .link-container {
+            position: relative;
+        }
+
+        .link, .static-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 1rem;
             border-radius: 12px;
             background: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             color: #1f2937;
             font-weight: 600;
-            text-align: center;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
-        .link:hover {
+        .link:hover, .static-link:hover {
             background: #e5e7eb;
         }
 
-        .static-link {
-            padding: 1rem;
-            border-radius: 12px;
+        .left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            color: #6b7280;
+        }
+
+        .copy-btn:hover {
+            color: #111827;
+        }
+
+        .qr {
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            width: 160px;
+            padding: 0.5rem;
             background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            color: #1f2937;
-            font-weight: 600;
-            text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .link-container:hover .qr,
+        .link-container:focus-within .qr {
+            display: block;
+        }
+
+        .qr img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
         }
 
         footer {
             margin-top: 2rem;
             font-size: 0.875rem;
             color: #6b7280;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .qr {
+                top: auto;
+                bottom: -180px;
+            }
         }
     </style>
 </head>
 <body>
-<h1>Thomas Lin – My Socials</h1>
-<div class="links">
-    <a class="link" href="https://www.instagram.com/thomaslin9" target="_blank">Instagram</a>
-    <div class="static-link">WeChat: ThomasLin12</div>
-    <a class="link" href="https://www.linkedin.com/in/lin-thomas/" target="_blank">LinkedIn</a>
+<h1>Thomas's Socials</h1>
+
+<div class="location">
+    📍 SF → NYC — please reach out if you're in the area!
 </div>
+
+<div class="links">
+
+    <div class="link-container">
+        <a class="link" href="https://www.instagram.com/thomaslin9" target="_blank">
+            <div class="left">
+                <i data-lucide="instagram"></i> Instagram
+            </div>
+        </a>
+        <div class="qr">
+            <img src="instagram-qr.png" alt="Instagram QR Code">
+        </div>
+    </div>
+
+    <div class="link-container">
+        <div class="static-link" tabindex="0">
+            <div class="left">
+                <i data-lucide="message-circle"></i> WeChat: ThomasLin12
+            </div>
+            <button class="copy-btn" onclick="copyText('ThomasLin12')" title="Copy">
+                <i data-lucide="copy"></i>
+            </button>
+        </div>
+        <div class="qr">
+            <img src="wechat-qr.png" alt="WeChat QR Code">
+        </div>
+    </div>
+
+    <a class="link" href="https://www.linkedin.com/in/lin-thomas/" target="_blank">
+        <div class="left">
+            <i data-lucide="linkedin"></i> LinkedIn
+        </div>
+    </a>
+
+    <div class="static-link">
+        <div class="left">
+            <i data-lucide="mic"></i> Discord: here2stay1
+        </div>
+        <button class="copy-btn" onclick="copyText('here2stay1')" title="Copy">
+            <i data-lucide="copy"></i>
+        </button>
+    </div>
+
+    <div class="static-link">
+        <div class="left">
+            <i data-lucide="swords"></i> LoL: Here2Stay#NA1
+        </div>
+        <button class="copy-btn" onclick="copyText('Here2Stay#NA1')" title="Copy">
+            <i data-lucide="copy"></i>
+        </button>
+    </div>
+</div>
+
 <footer>
-    Built with ❤️ and GitHub Pages
+    Thanks for all the memories ❤️
 </footer>
+
+<script>
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert(`Copied: ${text}`);
+        });
+    }
+
+    lucide.createIcons();
+</script>
 </body>
 </html>
