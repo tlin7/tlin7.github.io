@@ -119,13 +119,13 @@
         <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
           Thomas's Socials
         </h1>
-        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 blur-lg -z-10 rounded-full"></div>
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 blur-lg -z-10 rounded-full"></div>
       </div>
 
       <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 shadow-sm rounded-lg">
         <div class="flex items-center justify-center gap-2 text-blue-700">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
-          <span class="font-medium">SF → NYC — please reach out if you're in the area!</span>
+          <span class="font-medium">NYC — please reach out if you're in the area!</span>
         </div>
       </div>
     </div>
@@ -263,50 +263,54 @@
         } else {
           const div = document.createElement('div');
           div.className = 'relative flex items-center justify-between p-4 text-slate-700 group-hover/card:text-white transition-colors duration-300';
-          
+
           const leftDiv = document.createElement('div');
           leftDiv.className = 'flex items-center gap-3';
-          
+
           const iconContainer = document.createElement('div');
           iconContainer.className = 'p-2 rounded-lg bg-white/10 group-hover/card:bg-white/20 transition-colors duration-300';
-          
+
           const icon = document.createElement('i');
           icon.setAttribute('data-lucide', social.icon);
           icon.className = 'w-5 h-5';
-          
+
           iconContainer.appendChild(icon);
-          
+
           const textDiv = document.createElement('div');
-          
+
           const nameSpan = document.createElement('span');
           nameSpan.className = 'font-semibold';
           nameSpan.textContent = social.name;
-          
           textDiv.appendChild(nameSpan);
-          
+
           if (social.username) {
             const usernameDiv = document.createElement('div');
             usernameDiv.className = 'text-sm opacity-75';
             usernameDiv.textContent = social.username;
             textDiv.appendChild(usernameDiv);
-            
-            const copyButton = document.createElement('button');
+          }
+
+          leftDiv.appendChild(iconContainer);
+          leftDiv.appendChild(textDiv);
+
+// Right-side copy button
+          let copyButton = null;
+          if (social.username) {
+            copyButton = document.createElement('button');
             copyButton.className = 'relative z-10 h-8 w-8 p-0 hover:bg-white/20 group-hover/card:text-white rounded-md transition-colors duration-200 flex items-center justify-center';
             copyButton.onclick = () => copyToClipboard(social.username, social.name);
-            
+
             const copyIcon = document.createElement('i');
             copyIcon.setAttribute('data-lucide', 'copy');
             copyIcon.className = 'w-4 h-4';
-            
+
             copyButton.appendChild(copyIcon);
-            div.appendChild(copyButton);
           }
-          
-          leftDiv.appendChild(iconContainer);
-          leftDiv.appendChild(textDiv);
-          
+
           div.appendChild(leftDiv);
+          if (copyButton) div.appendChild(copyButton);
           card.appendChild(div);
+
         }
         
         linkContainer.appendChild(card);
