@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas's Socials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .animate-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .slide-in-from-bottom-2 {
+      animation: slideUp 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translate(-50%, 1rem);
+      }
+      to { 
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              600: '#475569',
+              700: '#334155',
+              900: '#0f172a'
+            },
+            blue: {
+              50: '#eff6ff',
+              200: '#bfdbfe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a'
+            },
+            indigo: {
+              50: '#eef2ff',
+              600: '#4f46e5',
+              900: '#312e81'
+            },
+            pink: {
+              500: '#ec4899',
+              600: '#db2777'
+            },
+            rose: {
+              500: '#f43f5e',
+              600: '#e11d48'
+            },
+            green: {
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a'
+            },
+            emerald: {
+              500: '#10b981',
+              600: '#059669'
+            },
+            amber: {
+              500: '#f59e0b',
+              600: '#d97706'
+            },
+            orange: {
+              500: '#f97316',
+              600: '#ea580c'
+            },
+            purple: {
+              600: '#9333ea',
+              700: '#7e22ce'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-md space-y-8">
+    <!-- Header -->
+    <div class="text-center space-y-4">
+      <div class="relative">
+        <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+          Thomas's Socials
+        </h1>
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 blur-lg -z-10 rounded-full"></div>
+      </div>
+
+      <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/50 shadow-sm rounded-lg">
+        <div class="flex items-center justify-center gap-2 text-blue-700">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
+          <span class="font-medium">SF → NYC — please reach out if you're in the area!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="space-y-3" id="social-links">
+      <!-- Links will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center">
+      <p class="text-slate-600 font-medium">Thanks for all the memories ❤️</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast px-4 py-2 bg-slate-900 text-white border-0 shadow-lg rounded-full">
+      <div class="flex items-center gap-2">
+        <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+        <span class="text-sm font-medium" id="toast-message"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Social links data
+    const socialLinks = [
+      {
+        name: "Instagram",
+        icon: "instagram",
+        href: "https://www.instagram.com/thomaslin9",
+        color: "from-pink-500 to-rose-500",
+        hoverColor: "hover:from-pink-600 hover:to-rose-600",
+        qrCode: "instagram-qr.png",
+      },
+      {
+        name: "WeChat",
+        icon: "message-circle",
+        username: "ThomasLin12",
+        color: "from-green-500 to-emerald-500",
+        hoverColor: "hover:from-green-600 hover:to-emerald-600",
+        qrCode: "wechat-qr.png",
+      },
+      {
+        name: "LinkedIn",
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/lin-thomas/",
+        color: "from-blue-600 to-blue-700",
+        hoverColor: "hover:from-blue-700 hover:to-blue-800",
+      },
+      {
+        name: "Discord",
+        icon: "mic",
+        username: "here2stay1",
+        color: "from-indigo-500 to-purple-600",
+        hoverColor: "hover:from-indigo-600 hover:to-purple-700",
+      },
+      {
+        name: "League of Legends",
+        icon: "swords",
+        username: "Here2Stay#NA1",
+        color: "from-amber-500 to-orange-500",
+        hoverColor: "hover:from-amber-600 hover:to-orange-600",
+      },
+    ];
+
+    // Function to copy text to clipboard
+    function copyToClipboard(text, label) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          showToast(`Copied ${label}!`);
+        })
+        .catch(err => {
+          console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // Function to show toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // Function to render social links
+    function renderSocialLinks() {
+      const container = document.getElementById('social-links');
+      
+      socialLinks.forEach((social, index) => {
+        const linkContainer = document.createElement('div');
+        linkContainer.className = 'relative group';
+        
+        const card = document.createElement('div');
+        card.className = `group/card relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 rounded-xl bg-white`;
+        card.style.animationDelay = `${index * 100}ms`;
+        
+        const gradient = document.createElement('div');
+        gradient.className = `absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover/card:opacity-100 transition-opacity duration-300`;
+        
+        card.appendChild(gradient);
+        
+        if (social.href) {
+          const link = document.createElement('a');
+          link.href = social.href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.className = 'relative flex items-center justify-between p-4 text-slate-700 group-hover/card:text-white transition-colors duration-300';
+          
+          const leftDiv = document.createElement('div');
+          leftDiv.className = 'flex items-center gap-3';
+          
+          const iconContainer = document.createElement('div');
+          iconContainer.className = 'p-2 rounded-lg bg-white/10 group-hover/card:bg-white/20 transition-colors duration-300';
+          
+          const icon = document.createElement('i');
+          icon.setAttribute('data-lucide', social.icon);
+          icon.className = 'w-5 h-5';
+          
+          iconContainer.appendChild(icon);
+          
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'font-semibold';
+          nameSpan.textContent = social.name;
+          
+          leftDiv.appendChild(iconContainer);
+          leftDiv.appendChild(nameSpan);
+          
+          link.appendChild(leftDiv);
+          card.appendChild(link);
+        } else {
+          const div = document.createElement('div');
+          div.className = 'relative flex items-center justify-between p-4 text-slate-700 group-hover/card:text-white transition-colors duration-300';
+          
+          const leftDiv = document.createElement('div');
+          leftDiv.className = 'flex items-center gap-3';
+          
+          const iconContainer = document.createElement('div');
+          iconContainer.className = 'p-2 rounded-lg bg-white/10 group-hover/card:bg-white/20 transition-colors duration-300';
+          
+          const icon = document.createElement('i');
+          icon.setAttribute('data-lucide', social.icon);
+          icon.className = 'w-5 h-5';
+          
+          iconContainer.appendChild(icon);
+          
+          const textDiv = document.createElement('div');
+          
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'font-semibold';
+          nameSpan.textContent = social.name;
+          
+          textDiv.appendChild(nameSpan);
+          
+          if (social.username) {
+            const usernameDiv = document.createElement('div');
+            usernameDiv.className = 'text-sm opacity-75';
+            usernameDiv.textContent = social.username;
+            textDiv.appendChild(usernameDiv);
+            
+            const copyButton = document.createElement('button');
+            copyButton.className = 'relative z-10 h-8 w-8 p-0 hover:bg-white/20 group-hover/card:text-white rounded-md transition-colors duration-200 flex items-center justify-center';
+            copyButton.onclick = () => copyToClipboard(social.username, social.name);
+            
+            const copyIcon = document.createElement('i');
+            copyIcon.setAttribute('data-lucide', 'copy');
+            copyIcon.className = 'w-4 h-4';
+            
+            copyButton.appendChild(copyIcon);
+            div.appendChild(copyButton);
+          }
+          
+          leftDiv.appendChild(iconContainer);
+          leftDiv.appendChild(textDiv);
+          
+          div.appendChild(leftDiv);
+          card.appendChild(div);
+        }
+        
+        linkContainer.appendChild(card);
+        
+        // QR Code
+        if (social.qrCode) {
+          const qrContainer = document.createElement('div');
+          qrContainer.className = 'absolute top-full left-1/2 transform -translate-x-1/2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50';
+          
+          const qrCard = document.createElement('div');
+          qrCard.className = 'p-3 bg-white shadow-xl border-2 border-slate-200 rounded-lg';
+          
+          const qrImageContainer = document.createElement('div');
+          qrImageContainer.className = 'relative';
+          
+          const qrImage = document.createElement('img');
+          qrImage.src = social.qrCode;
+          qrImage.alt = `${social.name} QR Code`;
+          qrImage.className = 'w-32 h-32 rounded-lg';
+          
+          const arrow = document.createElement('div');
+          arrow.className = 'absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-l-2 border-t-2 border-slate-200 rotate-45';
+          
+          const scanText = document.createElement('p');
+          scanText.className = 'text-xs text-slate-600 text-center mt-2 font-medium';
+          scanText.textContent = 'Scan to connect';
+          
+          qrImageContainer.appendChild(qrImage);
+          qrImageContainer.appendChild(arrow);
+          
+          qrCard.appendChild(qrImageContainer);
+          qrCard.appendChild(scanText);
+          
+          qrContainer.appendChild(qrCard);
+          linkContainer.appendChild(qrContainer);
+        }
+        
+        container.appendChild(linkContainer);
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSocialLinks();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
