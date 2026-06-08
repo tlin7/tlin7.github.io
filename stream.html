@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas's Stream</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
+  <div class="w-full max-w-4xl space-y-8">
+    <!-- Header -->
+    <div class="text-center space-y-4">
+      <div class="relative">
+        <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+          Live Stream
+        </h1>
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 blur-lg -z-10 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Video Embed -->
+    <div class="relative overflow-hidden shadow-xl rounded-xl bg-black aspect-video">
+      <iframe
+        src="https://ntv.cx/embed?t=U3kvVGsxU1RSbFNVNzYraHQ0eDVFWktGeGVzQkNwSHdpdVRML1F2aWtWSWM4dmtUTDhEVlRUKzNSb01mcWdLQVk2d2owWHRMMG5GeWdOZzRIa1AzSVFncUQvMUJsaU5XcDJic0pDK2drSHM9"
+        class="absolute inset-0 w-full h-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Back link -->
+    <div class="text-center">
+      <a href="index.html" class="inline-flex items-center gap-2 text-blue-700 font-medium hover:text-blue-900 transition-colors">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        Back to Socials
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
