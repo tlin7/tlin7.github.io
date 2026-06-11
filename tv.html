@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stream (TV)</title>
   <!--
-    TV/desktop version: load the player as the top-level page instead of an
-    iframe. Some TV browsers (e.g. Google TV) make the player show a
-    "remove sandbox attributes" notice when it's framed, even with no sandbox
-    attribute set. Running it as the top document avoids that entirely and is
-    still auto-fullscreen because the player fills its own page.
+    TV/desktop version: redirect straight to the real stream source.
+
+    The ntv.cx/embed page is only a wrapper that iframes embed.st inside it.
+    On some TV browsers (e.g. Google TV) embed.st sees it's framed and shows a
+    "remove sandbox attributes" notice. Pointing directly at the embed.st URL
+    as the top-level page removes every layer of framing, so there's nothing to
+    sandbox and it runs fullscreen.
+
+    Update this URL each day to the current event (grab it from the ntv player:
+    inspect -> the <iframe id="streamIframe"> src is the embed.st link).
   -->
-  <meta http-equiv="refresh" content="0; url=https://ntv.cx/embed?t=U3kvVGsxU1RSbFNVNzYraHQ0eDVFWktGeGVzQkNwSHdpdVRML1F2aWtWSWM4dmtUTDhEVlRUKzNSb01mcWdLQVk2d2owWHRMMG5GeWdOZzRIa1AzSVFncUQvMUJsaU5XcDJic0pDK2drSHM9">
+  <meta http-equiv="refresh" content="0; url=https://embed.st/embed/admin/ppv-san-antonio-spurs-vs-new-york-knicks/1">
   <style>
     html, body { margin: 0; height: 100%; background: #000; color: #fff;
       font-family: sans-serif; display: flex; align-items: center;
@@ -19,10 +24,10 @@
     a { color: #6cf; }
   </style>
   <script>
-    location.replace("https://ntv.cx/embed?t=U3kvVGsxU1RSbFNVNzYraHQ0eDVFWktGeGVzQkNwSHdpdVRML1F2aWtWSWM4dmtUTDhEVlRUKzNSb01mcWdLQVk2d2owWHRMMG5GeWdOZzRIa1AzSVFncUQvMUJsaU5XcDJic0pDK2drSHM9");
+    location.replace("https://embed.st/embed/admin/ppv-san-antonio-spurs-vs-new-york-knicks/1");
   </script>
 </head>
 <body>
-  <p>Loading stream… <a href="https://ntv.cx/embed?t=U3kvVGsxU1RSbFNVNzYraHQ0eDVFWktGeGVzQkNwSHdpdVRML1F2aWtWSWM4dmtUTDhEVlRUKzNSb01mcWdLQVk2d2owWHRMMG5GeWdOZzRIa1AzSVFncUQvMUJsaU5XcDJic0pDK2drSHM9">tap here if it doesn't load</a></p>
+  <p>Loading stream… <a href="https://embed.st/embed/admin/ppv-san-antonio-spurs-vs-new-york-knicks/1">tap here if it doesn't load</a></p>
 </body>
 </html>
